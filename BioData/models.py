@@ -33,7 +33,7 @@ class Member(models.Model):
 
 class Dependant(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    dependantId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    dependantId = models.ForeignKey(Member, related_name='dependants', on_delete=models.CASCADE)
     # depandantName = models.TextField()
     dependantAge = models.IntegerField()
     dependantRelationship = models.CharField(max_length=10)
@@ -43,7 +43,7 @@ class Dependant(models.Model):
 
 class Overview(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    memberId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    memberId = models.ForeignKey(Member, related_name='overview', on_delete=models.CASCADE)
     overviewHealthStatus = models.CharField(max_length=10)
     overviewRiskScore = models.IntegerField()
     overviewHealthGoals = models.TextField()
@@ -53,37 +53,37 @@ class Overview(models.Model):
 
 class Allergy(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    memberId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    memberId = models.ForeignKey(Member,related_name='allergy', on_delete=models.CASCADE)
     allergyAllargen = models.CharField(max_length=20)
     allergyReaction = models.CharField(max_length=100)
 
 
 class Surgery(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    memberId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    memberId = models.ForeignKey(Member, related_name='surgery' , on_delete=models.CASCADE)
     surgeryType = models.CharField(max_length=50)
     surgeryDate = models.DateField()
     
 class Othernote(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    memberId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    memberId = models.ForeignKey(Member,related_name='othernote' , on_delete=models.CASCADE)
     othernoteNote = models.TextField()
     
 class Admission(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    memberId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    memberId = models.ForeignKey(Member, related_name='admission', on_delete=models.CASCADE)
     admissionDate = models.DateField()
     admissionReason = models.CharField(max_length=100)
     
 class Family(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    memberId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    memberId = models.ForeignKey(Member,related_name='family', on_delete=models.CASCADE)
     familyRelationship = models.CharField(max_length=20)
     familyCondition = models.CharField(max_length=50)
     
 class Social(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    memberId = models.ForeignKey(Member, on_delete=models.CASCADE)
+    memberId = models.ForeignKey(Member, related_name='social', on_delete=models.CASCADE)
     socialNotes = models.CharField(max_length=20)
     atriskDueTo = models.CharField(max_length=50)
     
